@@ -25,14 +25,19 @@ int main(void) {
 
 	unsigned short my_short = 0x00;
 	ADC_init();
+	
+	unsigned char tmpB = 0x00;
+	unsigned char tmpD = 0x00;
 
     /* Insert your solution below */
     while (1) {
 	my_short = ADC;
-	// First 8 bits onto PORTB
-	PORTB = (char) (((1 << 8) - 1) & (my_short >> 0));
-	// last 2 bits onto PORTD
-	PORTD = (char)(my_short >> 8);
+	
+	tmpB = (char) my_short;
+	tmpD = (char)(my_short >> 8);
+
+	PORTB = tmpB;
+	PORTD = tmpD;
     }
  
     return 1;
