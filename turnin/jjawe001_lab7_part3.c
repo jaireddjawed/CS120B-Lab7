@@ -26,7 +26,7 @@ int main(void) {
 	ADC_init();
 
 	unsigned short my_short = 0x00;
-	unsigned char MAX = 0xFF;
+	unsigned char MAX = 0x3E0;
 	unsigned char tmpB = 0x00;
 
 	while (1) {

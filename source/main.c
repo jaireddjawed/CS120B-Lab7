@@ -13,6 +13,10 @@
 #include "simAVRHeader.h"
 #endif
 
+// Note: I determined the MAX value used in exercises 3 and 4 after
+// using a flashlight on the photoresistor
+// the max value is 0x3E0
+
 void ADC_init() {
 	ADCSRA |= (1 << ADEN) | (1 << ADSC) | (1 << ADATE);
 }
@@ -23,25 +27,23 @@ int main(void) {
 	DDRB = 0xFF; PORTB = 0x00;
 	DDRD = 0xFF; PORTD = 0x00;
 
-	ADC_init();
-
 	unsigned short my_short = 0x00;
-	unsigned char MAX = 0xFF;
+	ADC_init();
+	
 	unsigned char tmpB = 0x00;
+	unsigned char tmpD = 0x00;
 
-	while (1) {
-		my_short = ADC;
+    /* Insert your solution below */
+    while (1) {
+	my_short = ADC;
+	
+	tmpB = (char) my_short;
+	tmpD = (char)(my_short >> 8);
 
-		unsigned char my_char = (char) my_short;
+	PORTB = tmpB;
+	PORTD = tmpD;
+    }
+ 
 
-		if (my_char >= MAX/2) {
-			tmpB = 0x01;
-		}
-		else if (my_char < MAX/2) {
-			tmpB = 0x00;
-		}
-
-		PORTB = tmpB;
-	}
     return 1;
 }
